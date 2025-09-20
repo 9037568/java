@@ -24,10 +24,12 @@ public class UniqueExts
         for(File f : entries) {
             if( f.isDirectory() && recursive) {
               extensions.addAll(scan(f.getAbsolutePath(), true));
+            } else if( f.isDirectory() ) {
+              continue;
             } else {
                 Optional<String> ext = getExtension(f.getName());
                 if( ext != null && ext.isPresent() ) {
-                    extensions.add(ext.get());
+                    extensions.add(ext.get().toLowerCase());
                 }
             }
         }
